@@ -25,7 +25,15 @@ spec:
               protocol: TCP
           env:
             - name: ORION_DATABASE_URL
-              value: {{ .Values.server.databaseUrl }}
+              {{ if ne .Values.server.database.secret.enabled }}
+              value: {{ .Values.server.database.url }}
+              {{ else }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.server.database.secret.secretName }}
+                  key: {{ .Values.server.database.secret.secretKey }}
+              {{ end }}
+
 ---
 apiVersion: apps/v1
 kind: Deployment
