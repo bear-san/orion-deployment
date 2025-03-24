@@ -23,6 +23,8 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          args:
+            - --config=/etc/orion/config/provider-config.yaml
           env:
             - name: ORION_DATABASE_URL
               {{ if .Values.server.database.secret.enabled }}
