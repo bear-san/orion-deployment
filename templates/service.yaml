@@ -7,7 +7,7 @@ spec:
     app.kubernetes.io/name: orion-server
     app.kubernetes.io/instance: orion
   ports:
-    - port: 80
+    - port: 8000
       targetPort: 8000
   type: ClusterIP
 ---
