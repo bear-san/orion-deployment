@@ -16,3 +16,7 @@ server:
 console:
   image: "bearsan/orion-console"
   serverUrl: http://localhost:8000
+ingress:
+  enabled: true
+  className: ""
+  host: ""

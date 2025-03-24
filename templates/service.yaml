@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orion-service
+spec:
+  selector:
+    app.kubernetes.io/name: orion-console
+    app.kubernetes.io/instance: orion
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP
