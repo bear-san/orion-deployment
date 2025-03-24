@@ -2,5 +2,5 @@ server:
   image: "bearsan/orion-server"
   databaseUrl: "postgres://orion:orion@localhost:5432/orion"
 console:
-  image: "bearsan/orion-server"
+  image: "bearsan/orion-console"
   serverUrl: http://localhost:8000
