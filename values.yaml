@@ -6,6 +6,13 @@ server:
       enabled: false
       secretName: ""
       secretKey: ""
+  config:
+    inline: ""
+    exists:
+      enabled: false
+      kind: ""
+      name: ""
+      key: ""
 console:
   image: "bearsan/orion-console"
   serverUrl: http://localhost:8000

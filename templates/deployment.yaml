@@ -33,6 +33,27 @@ spec:
               {{ else }}
               value: {{ .Values.server.database.url }}
               {{ end }}
+          {{ if .Values.server.config.exists.enabled }}
+          volumeMounts:
+            - mountPath: /etc/orion/config
+              name: config
+          {{ end }}
+      {{ if .Values.server.config.exists.enabled }}
+      volumes:
+        - name: config
+          {{ if eq .Values.server.config.exists.kind "ConfigMap" }}
+          configMap:
+            name: {{ .Values.server.config.exists.name }}
+            items:
+              - key: {{ .Values.server.config.exists.key }}
+                path: provider-config.yaml
+          {{ else if eq .Values.server.config.exists.kind "Secret" }}
+          secret:
+            secretName: {{ .Values.server.config.exists.name }}
+            items:
+              - key: {{ .Values.server.config.exists.key }}
+                path: provider-config.yaml
+          {{ end }}
 
 ---
 apiVersion: apps/v1
