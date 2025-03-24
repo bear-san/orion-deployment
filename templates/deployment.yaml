@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orion-server
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: orion-server
+      app.kubernetes.io/instance: orion
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: orion-server
+        app.kubernetes.io/instance: orion
+    spec:
+      containers:
+        - name: orion-server
+          image: {{ .Values.server.image }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: ORION_DATABASE_URL
+              value: {{ .Values.server.databaseUrl }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orion-console
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: orion-console
+      app.kubernetes.io/instance: orion
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: orion-console
+        app.kubernetes.io/instance: orion
+    spec:
+      containers:
+        - name: orion-server
+          image: {{ .Values.console.image }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: API_BASE_URL
+              value: {{ .Values.console.serverUrl }}
