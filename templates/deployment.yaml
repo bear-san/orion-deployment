@@ -54,7 +54,7 @@ spec:
               - key: {{ .Values.server.config.exists.key }}
                 path: provider-config.yaml
           {{ end }}
-
+      {{ end }}
 ---
 apiVersion: apps/v1
 kind: Deployment
