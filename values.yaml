@@ -1,6 +1,24 @@
 server:
   image: "bearsan/orion-server"
-  databaseUrl: "postgres://orion:orion@localhost:5432/orion"
+  database:
+    url: "postgres://orion:orion@localhost:5432/orion"
+    secret:
+      enabled: false
+      secretName: ""
+      secretKey: ""
+  config:
+    inline: ""
+    exists:
+      enabled: false
+      kind: ""
+      name: ""
+      key: ""
 console:
   image: "bearsan/orion-console"
   serverUrl: http://localhost:8000
+ingress:
+  enabled: true
+  className: ""
+  host: ""
+oauth2-proxy:
+  enabled: true
