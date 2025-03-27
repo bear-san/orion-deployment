@@ -20,3 +20,5 @@ ingress:
   enabled: true
   className: ""
   host: ""
+oauth2-proxy:
+  enabled: true
